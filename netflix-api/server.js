@@ -14,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.static(path.join(__currDirname, "./netflix-ui/build")));
+app.use("/api/user", userRoutes);
+
 app.get("*", (_, res) => {
   res.sendFile(path.join(__currDirname, "./netflix-ui/build/index.html"), (err) => {
     res.status(500).send(err);
@@ -30,8 +32,6 @@ const connect = () => {
       throw err;
     });
 };
-
-app.use("/api/user", userRoutes);
 
 const port = process.env.PORT || 8000;
 
